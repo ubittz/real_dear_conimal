@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../const/colors.dart';
+import '../../const/text_styles.dart';
+
+class CustomTextFormField extends StatelessWidget {
+  final ValueChanged<String>? onChanged;
+  final FormFieldSetter<String>? onSaved;
+  final FormFieldValidator<String>? validator;
+
+  final TextEditingController? controller;
+  final TextInputType textInputType;
+  final TextInputAction textInputAction;
+  final bool obscureText;
+  final TextAlign textAlign;
+  final String? hintText;
+  final TextStyle? hintStyle;
+  final Widget? suffixIcon;
+  final String? suffixText;
+  final BoxConstraints? suffixIconConstraints;
+  final int? maxLength;
+  final int? maxLines;
+  final bool realOnly;
+  final bool enabled;
+  final VoidCallback? onEditingComplete;
+  final FocusNode? focusNode;
+  final TextStyle? style;
+
+  const CustomTextFormField({
+    super.key,
+    required this.onChanged,
+    required this.onSaved,
+    required this.validator,
+    this.controller,
+    this.textInputType = TextInputType.text,
+    this.textInputAction = TextInputAction.done,
+    this.obscureText = false,
+    this.textAlign = TextAlign.start,
+    this.hintText,
+    this.hintStyle,
+    this.suffixIcon,
+    this.suffixText,
+    this.suffixIconConstraints,
+    this.maxLength,
+    this.maxLines = 1,
+    this.realOnly = false,
+    this.enabled = true,
+    this.onEditingComplete,
+    this.focusNode,
+    this.style,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onChanged: onChanged,
+      onSaved: onSaved,
+      validator: validator,
+      controller: controller,
+      onEditingComplete: onEditingComplete,
+      focusNode: focusNode,
+      obscureText: obscureText,
+      // font에 글자 없으면 사용 못함
+      obscuringCharacter: '*',
+      textAlign: textAlign,
+      decoration: InputDecoration(
+        // filled: true,
+        // fillColor: MyColor.grayScale050,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 16.0,
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: MyColor.grayScale200,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: MyColor.grayScale200,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: MyColor.grayScale200,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: MyColor.grayScale200,
+          ),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        enabled: enabled,
+        hintText: hintText,
+        hintStyle: (hintStyle == null)
+            ? MyTextStyle.body14R.copyWith(color: MyColor.grayScale200)
+            : hintStyle,
+        suffixIcon: suffixIcon,
+        suffixIconConstraints: suffixIconConstraints,
+        suffixText: suffixText,
+      ),
+      cursorColor: MyColor.main400,
+      cursorHeight: 22.0,
+      style: style ??
+          MyTextStyle.body14R.copyWith(
+            color: enabled ? MyColor.grayScale900 : MyColor.grayScale300,
+          ),
+      maxLength: maxLength,
+      maxLines: maxLines,
+      textInputAction: textInputAction,
+      keyboardType: textInputType,
+      inputFormatters: textInputType == TextInputType.number
+          ? [FilteringTextInputFormatter.digitsOnly]
+          : [],
+      readOnly: realOnly,
+      enabled: enabled,
+    );
+  }
+}

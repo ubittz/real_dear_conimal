@@ -54,7 +54,7 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
           onTap: () {
             showCustomModalBottomSheet(
               context: context,
-              bottomSheetWidget: ModalBottomSheetWidget(
+              bottomSheetWidget: const ModalBottomSheetWidget(
                 height: 380,
                 child: PetModalBottomSheet(),
               ),
@@ -96,9 +96,9 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                     ...List.generate(
                       3,
                       (int index) {
-                        late final imageUrl;
-                        late final title;
-                        late final description;
+                        late final String imageUrl;
+                        late final String title;
+                        late final String description;
                         switch (index) {
                           case 0:
                             imageUrl = ImagePath.spoonButton;
@@ -128,10 +128,10 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                               border: Border.all(
                                   color: MyColor.grayScale100, width: 1),
                               borderRadius: BorderRadius.circular(12),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: MyColor.grayScale100,
-                                  offset: const Offset(0, 2),
+                                  offset: Offset(0, 2),
                                   blurRadius: 4,
                                 ),
                               ],
@@ -188,10 +188,10 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                           border:
                               Border.all(color: MyColor.grayScale100, width: 1),
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: MyColor.grayScale100,
-                              offset: const Offset(0, 2),
+                              offset: Offset(0, 2),
                               blurRadius: 4,
                             ),
                           ],
@@ -226,14 +226,14 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                                     if (isExpanded1)
                                       const SizedBox(height: 8.0),
                                     if (isExpanded1)
-                                      Divider(
+                                      const Divider(
                                         color: MyColor.grayScale100,
                                         height: 20.0,
                                       ),
                                     if (isExpanded1)
                                       ...patScreenData[0]
                                           .mapIndexed((index, e) {
-                                        late final title;
+                                        late final String title;
                                         switch (index) {
                                           case 0:
                                             title = '병명';
@@ -332,14 +332,14 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                                     if (isExpanded2)
                                       const SizedBox(height: 8.0),
                                     if (isExpanded2)
-                                      Divider(
+                                      const Divider(
                                         color: MyColor.grayScale100,
                                         height: 20.0,
                                       ),
                                     if (isExpanded2)
                                       ...patScreenData[1]
                                           .mapIndexed((index, e) {
-                                        late final title;
+                                        late final String title;
                                         switch (index) {
                                           case 0:
                                             title = '병명';
@@ -392,7 +392,7 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                       onPressed: () async {
                         showCustomGeneralDialog(
                           context: context,
-                          bottomSheetWidget: _UploadPopUp(),
+                          bottomSheetWidget: const _UploadPopUp(),
                         );
                       },
                       child: const Text('진단서 업로드'),
@@ -495,9 +495,9 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                     ...List.generate(
                       2,
                       (int index) {
-                        late final imageUrl;
-                        late final title;
-                        late final description;
+                        late final String imageUrl;
+                        late final String title;
+                        late final String description;
                         switch (index) {
                           case 0:
                             imageUrl = ImagePath.pillButton;
@@ -570,15 +570,12 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
                 child: StressRowText(
                   title1: '추천 영양제',
                   title2: '',
                   title3: '',
-                  suffixWidget: PhosphorIcon(
-                    PhosphorIcons.caretRight(),
-                  ),
                 ),
               ),
               const SizedBox(height: 12.0),
@@ -594,9 +591,7 @@ class _MyPetScreenState extends ConsumerState<MyPetScreen> {
 }
 
 class _UploadPopUp extends StatefulWidget {
-  const _UploadPopUp({
-    super.key,
-  });
+  const _UploadPopUp();
 
   @override
   State<_UploadPopUp> createState() => _UploadPopUpState();
@@ -652,7 +647,9 @@ class _UploadPopUpState extends State<_UploadPopUp> {
                           }
                         : () {
                             context.pop();
-                            showCustomToast(context, msg: "진단서가 업로드 되었습니다.");
+                            showCustomToast(context,
+                                msg:
+                                    "진단서 업로드 완료, 분석 중입니다.\n24시간 이내로 솔루션 내용이 나오게됩니다.");
                           },
                     child: file == null
                         ? const Text('파일 등록')

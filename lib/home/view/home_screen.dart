@@ -59,16 +59,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           children: [
             SizedBox(
               height: 200.0,
-              child: PageView.builder(
-                controller: controller,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    return Image.asset(ImagePath.homeBanner1);
-                  } else {
-                    return Image.asset(ImagePath.homeBanner2);
-                  }
-                },
-              ),
+              child: Image.asset(ImagePath.homeBanner1),
             ),
             Padding(
               padding:
